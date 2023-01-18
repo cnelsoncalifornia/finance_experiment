@@ -1,0 +1,36 @@
+{{ block title }}Superstar stocks <span style="background-color: #FFFF00">are possible</span> in this round.{{ endblock }}
+{{ block content }}
+    <p>
+        Welcome to round {{ current_round }}!
+    </p>
+
+    <br>
+
+    <p>
+        You will be shown a set of 15 stocks.
+        These have no relationship with any stocks you have seen previously.
+    </p>
+
+    <br>
+
+    <p>
+        For this round, you are given {{ C.CREDIT }} in currency.  You can use this to bid on stocks.
+    </p>
+
+    <br>
+    <p>
+        Important: In this round superstar stocks are possible.
+    </p>
+
+    <br>
+
+    <p>
+        Important: You have enough currency to cover the maximum bid for each bid that you will make in this round.
+        You cannot run out of currency in your bids!
+    </p>
+
+    <br>
+
+    {{ next_button }}
+
+{{ endblock }}

@@ -1,0 +1,26 @@
+{{ block title }}Results{{ endblock }}
+{{ block content }}
+
+    <p> Your first bid was {{ player.bid_3 }}. </p>
+
+    <p> A random whole number between 1 and {{ C.MAX }} was {{ ran_int }}.</p>
+
+    <p> {{ statement }} </p>
+
+    <p> In this market you have acquired {{ player.shares_acquired_3 }} share(s) of stock {{ player.stock_3}}. </p>
+
+    <br>
+
+    <p> Your second bid was {{ player.bid_3_2 }}. </p>
+
+    <p> A random whole number between 1 and {{ C.MAX }} was {{ ran_int_2 }}.</p>
+
+    <p> {{ statement_2 }} </p>
+
+    <p> In this market you have acquired {{ player.shares_acquired_3_2 }} share(s) of stock {{ player.stock_3_2 }}. </p>
+
+
+
+    {{ next_button }}
+
+{{ endblock }}

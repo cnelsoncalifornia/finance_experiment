@@ -1,0 +1,65 @@
+{{ block content }}
+
+    <p>
+        In this round, superstar stocks are possible.  You will answer questions about some of the following stocks.
+
+        Now 6 of the 10 periods are revealed.
+
+    </p>
+
+    <p>
+        Superstar stocks move +1 with 99% probability. <br>
+
+        Regular stocks move +1 with 50% probability.
+
+    </p>
+
+    <img src="{{ static image_path1 }}"/>   <br> <br>
+
+    <img src="{{ static image_path2 }}"/>   <br> <br>
+
+    <p>
+        Each one of these stocks was given a 2% chance of being a superstar when they were created.
+
+        Now, given the history so far, give you best guess for the updated chance that the following stocks are superstars.
+
+        Give your best guesses for the following probabilities.
+
+        Entering 0 means there is no chance and entering 100 means that it is certain.
+    </p>
+
+    <p>
+        The probability that stock {{ player.stock_6 }} is a superstar:
+
+        {{ formfield 'prob_high_6'}}
+    </p>
+
+    <p>
+        The probability that the stock {{ player.stock_6_2 }} is a superstar:
+    </p>
+        {{ formfield 'prob_low_6'}}
+
+    <p>
+        Give your best guess for the final payout in Period 10 for stock {{ player.stock_6 }}:
+    </p>
+        {{ formfield 'guess_6'}}
+
+    <p>
+        Give your best guess for the final payout in Period 10 for stock {{ player.stock_6_2 }}:
+    </p>
+        {{ formfield 'guess_6_2'}}
+
+    <p>
+        What is the highest price you are willing to pay for one share of stock {{ player.stock_6 }}?
+    </p>
+    {{ formfield 'bid_6' }}
+
+    <p>
+        What is the highest price you are willing to pay for one share of stock {{ player.stock_6_2 }}?
+    </p>
+    {{ formfield 'bid_6_2' }}
+
+
+    {{ next_button }}
+
+{{ endblock }}

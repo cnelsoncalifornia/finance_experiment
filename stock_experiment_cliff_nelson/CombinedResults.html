@@ -1,0 +1,65 @@
+{{ block title }}Experimental Results So Far{{ endblock }}
+{{ block content }}
+
+    <p> This chart shows the final payout of the stocks with the ones you had an opportunity to purchase highlighted. </p>
+
+    <img src="{{ static image_path }}"/>   <br> <br>
+
+
+    <p> In this round you acquired the following: </p>
+
+    <p style = "margin-left:40px"> {{ player.shares_acquired_3}} share(s) of stock {{ player.stock_3 }} in the first
+        market.  {{ player.stock_3 }} has a final payout of {{ player.payoff_3 }}.
+        Therefore, you earned {{ player.earnings_3 }}. </p>
+
+    <p style = "margin-left:40px"> {{ player.shares_acquired_3_2}} share(s) of stock {{ player.stock_3_2 }} in the first
+        market. {{ player.stock_3_2 }} which had a final payout of {{ player.payoff_3_2 }}.
+        Therefore, you earned {{ player.earnings_3_2 }}. </p>
+
+    <p style = "margin-left:40px"> {{ player.shares_acquired_6}} share(s) of stock {{ player.stock_6 }} in the second
+        market.  {{ player.stock_6 }} had a final payout of {{ player.payoff_6 }}.
+        Therefore, you earned {{ player.earnings_6 }}.  </p>
+
+    <p style = "margin-left:40px"> {{ player.shares_acquired_6_2}} share(s) of stock {{ player.stock_6_2 }} in the second
+        market.  {{ player.stock_6_2 }} which had a final payout of {{ player.payoff_6_2 }}.
+        Therefore, you earned {{ player.earnings_6_2 }}. </p>
+
+
+    <p style = "margin-left:40px">  You have {{ player.cash_balance }} of unspent currency. </p>
+
+    <p> Therefore, your total earnings for this round is {{ player.earnings }} = ({{ player.earnings_3}} + {{ player.earnings_3_2}}
+        + {{ player.earnings_6 }} + {{ player.earnings_6_2 }} + {{ player.cash_balance}}). </p> <br>
+
+    <p>
+        In the first market:
+    </p>
+
+    <p style = "margin-left:40px">
+        Your guess for the final payout for stock {{ player.stock_3 }} was {{ player.guess_3}}.
+        The actual payout was {{ player.payoff_3}}.
+    </p>
+
+    <p style = "margin-left:40px">
+        Your guess for the final payout for stock {{ player.stock_3_2 }} was {{ player.guess_3_2}}.
+        The actual payout was {{ player.payoff_3_2}}.
+    </p> <br>
+
+    <p>
+        In the second market:
+    </p>
+
+    <p style = "margin-left:40px">
+        Your guess for the final payout for stock {{ player.stock_6 }} was {{ player.guess_6}}.
+        The actual payout was {{ player.payoff_6}}.
+    </p>
+
+    <p style = "margin-left:40px">
+        Your guess for the final payout for stock {{ player.stock_6_2 }} was {{ player.guess_6_2}}.
+        The actual payout was {{ player.payoff_6_2}}.
+    </p> <br>
+
+    <p> Your cumulative earnings for this experiment so far is {{ player.final_earnings }}. </p>
+
+    {{ next_button }}
+
+{{ endblock }}
