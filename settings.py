@@ -45,7 +45,7 @@ SESSION_CONFIGS = [
         name='stock_experiment_cliff_nelson',
         display_name="Stock Experiment",
         app_sequence=['Directions', app_1, app_2, 'final_instructions'],
-        num_demo_participants=1,
+        num_demo_participants=10,
         number=number,
     ),
 #    dict(
