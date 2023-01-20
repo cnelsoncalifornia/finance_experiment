@@ -2,25 +2,25 @@ from otree.api import *
 import random
 
 class C(BaseConstants):
-    NAME_IN_URL = 'survey_2'
+    NAME_IN_URL = 'survey_1'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
     CREDIT = 80 # This is sufficient to cover the maximum bidding price of 20 in each of the 4 bidding decisions per round.
     MAX = 20 # Maximum bid.
     NAMES = {
-        1: ['H', 'A', 'H', 'C'],
-        2: ['B', 'H', 'M', 'G'],
-        3: ['B', 'A', 'D', 'C'],
-        4: ['D', 'C', 'A', 'C'],
-        5: ['D', 'K', 'G', 'A']
-    }
+        1: ['A','H','B','H'],
+        2: ['J','A','J','A'],
+        3: ['I','A','M','C'],
+        4: ['G','A','E','A'],
+        5: ['M','A','M','F']
+    } # In round 1, the highest stock is A in market 1 and the lowest stock is H.  The highest stock in market 2 is B and the lowest is H.
 
     PAYOFFS = {
-        1: {'A': 8, 'C': 10, 'H': 20},
-        2: {'B': 16, 'G': 10, 'H': 10, 'M': 14},
-        3: {'A': 8, 'B': 10, 'C': 6, 'D': 14},
-        4: {'A': 12, 'C': 12, 'D': 14},
-        5: {'A': 6, 'D': 14, 'G': 20, 'K': 12}
+        1: {'A':12, 'B':14, 'H':2},
+        2: {'A':10, 'J':12},
+        3: {'A':6, 'C':10, 'I':12, 'M':12},
+        4: {'A':12, 'E':12, 'G': 6},
+        5: {'A':9, 'F':11, 'M':15}
     }
 
 
@@ -80,7 +80,7 @@ class Player(BasePlayer):
 # PAGES
 class Intro(Page):
     def vars_for_template(player: Player):
-        if player.subsession.session.config['number'] == 1:  # The current app goes first.  There are no rounds from the other app.
+        if player.subsession.session.config['number'] == 0:  # The current app goes first.  There are no rounds from the other app.
             current_round = player.round_number
         else:                                                # The current app goes second.  Adds the rounds from the other app.
             current_round = player.round_number + 5
@@ -103,12 +103,12 @@ class Bid1(Page):
 
 
        return dict(
-          image_path1= 'stock_experiment_cliff_nelson/stock_movements_{}_part1.jpg'.format(player.round_number),
-          image_path2='stock_experiment_cliff_nelson/stock_movements_{}_part1_graph.jpg'.format(player.round_number),
+          image_path1= 'stock_experiment_cliff_nelson/stock_movements00_{}_part1.jpg'.format(player.round_number),
+          image_path2='stock_experiment_cliff_nelson/stock_movements00_{}_part1_graph.jpg'.format(player.round_number),
 
        )
     form_model = 'player'
-    form_fields = ['prob_3','prob_3_2','guess_3','guess_3_2','bid_3','bid_3_2']
+    form_fields = ['guess_3','guess_3_2','bid_3','bid_3_2']
 
 class Bid2(Page):
     def vars_for_template(player: Player):
@@ -119,11 +119,11 @@ class Bid2(Page):
         player.payoff_6_2 = C.PAYOFFS[player.round_number][player.stock_6_2]  # The payoff of the second stock that can be purchased after period 3.
 
         return dict(
-            image_path1= 'stock_experiment_cliff_nelson/stock_movements_{}_part2.jpg'.format(player.round_number),
-            image_path2='stock_experiment_cliff_nelson/stock_movements_{}_part2_graph.jpg'.format(player.round_number)
+            image_path1= 'stock_experiment_cliff_nelson/stock_movements00_{}_part2.jpg'.format(player.round_number),
+            image_path2='stock_experiment_cliff_nelson/stock_movements00_{}_part2_graph.jpg'.format(player.round_number)
         )
     form_model = 'player'
-    form_fields = ['prob_6','prob_6_2','guess_6','guess_6_2','bid_6','bid_6_2']
+    form_fields = ['guess_6','guess_6_2','bid_6','bid_6_2']
 
 class Results1(Page):
     @staticmethod
@@ -144,7 +144,7 @@ class Results1(Page):
         purchase_3_2 = (ran_int_2<=player.bid_3_2)
 
         if purchase_3_2:
-            player.price_3_2 = ran_int_2
+            player.price_3_2
             player.shares_acquired_3_2 = 1
             player.cash_balance -= player.price_3_2
             statement_2 = "Since " + str(ran_int_2) +" is less than or equal to your bid, you puchased 1 share of stock " + player.stock_3_2 + " at the price of " + str(player.price_3_2) +"."
@@ -221,13 +221,13 @@ class CombinedResults(Page):
         for temp_player in all_players:
             player.final_earnings += temp_player.earnings
 
-        if player.subsession.session.config['number'] == 1:  # The current app goes first.  Defines the participant variable 'final_earnings'.
+        if player.subsession.session.config['number'] == 0:  # The current app goes first.  Defines the participant variable 'final_earnings'.
             player.participant.vars['final_earnings'] = player.final_earnings
         else:                                                # The current app goes second.  Adds to the participant variable 'final_earnings'.
             player.final_earnings = player.participant.vars['final_earnings'] + player.final_earnings
 
         return dict(
-            image_path= 'stock_experiment_cliff_nelson/stock_movements_{}_part3.jpg'.format(player.round_number)
+            image_path= 'stock_experiment_cliff_nelson/stock_movements00_{}_part3.jpg'.format(player.round_number)
         )
 
 page_sequence = [Intro, Bid1 , Results1, Bid2, Results2, CombinedResults]
