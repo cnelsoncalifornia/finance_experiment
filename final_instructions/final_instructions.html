@@ -4,9 +4,17 @@
 
     <p>
 
-    Thank you for participating in this experiment!
-        <br><br>
-    Please let the administrator know that you are done and are ready to collect your payment.
-    </p>
+    <p> Thank you for participating in this experiment! </p>
+
+    <p> Your cumulative earnings for this experiment was {{ player.final_earnings }}. </p>
+
+    <p> Each experimental currency unit is worth ${{ C.CONVERSION_TO_USD }}0. </p>
+
+    <p> Your final payment is ${{ player.final_earnings_usd }} or $15.50, whichever is greater.  </p>
+
+    <p> Please let the administrator know that you are done and are ready to collect your payment. </p>
+
+    <p> This is a demo only, no payment will be given. </p>
+
 
 {{ endblock }}

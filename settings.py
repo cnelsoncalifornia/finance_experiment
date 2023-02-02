@@ -1,5 +1,7 @@
 from os import environ
 import random
+#import sys
+#from termcolor import colored
 
 
 
@@ -16,10 +18,6 @@ headers["Expires"] = "0"
 
 resp = requests.get(url, headers=headers)
 #End clear cache code block.
-
-
-
-
 
 number = round(random.randint(0,1))  # Change this at random
 
@@ -44,8 +42,8 @@ SESSION_CONFIGS = [
     dict(
         name='stock_experiment_cliff_nelson',
         display_name="Stock Experiment",
-        app_sequence=['Directions', app_1, app_2, 'final_instructions'],
-        num_demo_participants=10,
+        app_sequence=['directions', app_1, app_2, 'final_instructions'], #In full version, add 'directions',
+        num_demo_participants=20,
         number=number,
     ),
 #    dict(

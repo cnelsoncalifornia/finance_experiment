@@ -8,25 +8,42 @@ class C(BaseConstants):
     CREDIT = 80 # This is sufficient to cover the maximum bidding price of 20 in each of the 4 bidding decisions per round.
     MAX = 20 # Maximum bid.
     NAMES = {
-        1: ['A','H','B','H'],
-        2: ['J','A','J','A'],
-        3: ['I','A','M','C'],
-        4: ['G','A','E','A'],
-        5: ['M','A','M','F']
+        1: ['I','A','M','C'],
+        2: ['G','A','E','A'],
+        3: ['A','H','B','H'],
+        4: ['J','A','J','A'],
+        5: ['J','B','N','B']
     } # In round 1, the highest stock is A in market 1 and the lowest stock is H.  The highest stock in market 2 is B and the lowest is H.
 
     PAYOFFS = {
-        1: {'A':12, 'B':14, 'H':2},
-        2: {'A':10, 'J':12},
-        3: {'A':6, 'C':10, 'I':12, 'M':12},
-        4: {'A':12, 'E':12, 'G': 6},
-        5: {'A':9, 'F':11, 'M':15}
+        1: {'A':6, 'C':10, 'I':12, 'M':12},
+        2: {'A':12, 'E':12, 'G': 6},
+        3: {'A': 12, 'B': 14, 'H': 2},
+        4: {'A': 10, 'J': 12},
+        5: {'B': 8, 'J': 14, 'N': 14}
+    }
+
+    PROJ_PAYOFF_3 = {  # Projected payoffs in period 3.
+        1: {'A': 9, 'C': 11,'I': 13, 'M': 13},
+        2: {'A': 9, 'E': 11, 'G': 13},
+        3: {'A': 13, 'B': 13, 'H': 7},
+        4: {'A': 9, 'J': 13},
+        5: {'B': 7, 'J': 13, 'N': 13}
+    }
+
+    PROJ_PAYOFF_6 = {  # Projected payoffs in period 6.
+        1: {'A': 8, 'C': 10,'I': 12, 'M': 14},
+        2: {'A': 10, 'E': 12, 'G': 10},
+        3: {'A': 12, 'B': 14, 'H': 4},
+        4: {'A': 8, 'J': 14},
+        5: {'B': 6, 'J': 12, 'N': 14}
     }
 
 
 
 class Subsession(BaseSubsession):
-    cummulative_earnings = models.IntegerField(initial = 0)
+    #cummulative_earnings = models.IntegerField(initial = 0)
+    pass
 
 
 class Group(BaseGroup):
@@ -40,6 +57,8 @@ class Player(BasePlayer):
     bid_3_2 = models.IntegerField(label='Bid:', min=0, max=20)
     price_3 = models.IntegerField(initial = 0)
     price_3_2 = models.IntegerField(initial = 0)
+    curr_payoff_3 = models.IntegerField(initial = 0) # Projected payoff after period 3 of first stock.
+    curr_payoff_3_2 = models.IntegerField(initial = 0)
     shares_acquired_3 = models.IntegerField(initial=0)  # Shares acquired in the first purchase after period 3.
     shares_acquired_3_2 = models.IntegerField(initial=0)  # Shares acquired in the second purchase after period 3.
     payoff_3 = models.IntegerField(initial=0) # Payoff for the first stock purchased after round 3.
@@ -55,6 +74,8 @@ class Player(BasePlayer):
     bid_6_2 = models.IntegerField(label='Bid:', min=0, max=20)
     price_6 = models.IntegerField(initial = 0)
     price_6_2 = models.IntegerField(initial = 0)
+    curr_payoff_6 = models.IntegerField(initial = 0) # Projected payoff after period 3 of first stock.
+    curr_payoff_6_2 = models.IntegerField(initial = 0)
     shares_acquired_6 = models.IntegerField(initial=0)  # Shares acquired in the first purchase after period 6.
     shares_acquired_6_2 = models.IntegerField(initial=0)  # Shares acquired in the second purchase after period 6.
     payoff_6 = models.IntegerField(initial=0) # Payoff for the first stock purchased after round 6.
@@ -72,8 +93,8 @@ class Player(BasePlayer):
     stock_6_2 = models.StringField(initial='') # Name of stock that could be picked at the end of round 6.
 
     final_earnings = models.IntegerField(initial=0)
-    cash_balance = models.IntegerField(initial=C.CREDIT)
-    amount_paid = models.IntegerField(initial=0)
+    #cash_balance = models.IntegerField(initial=C.CREDIT)
+    #amount_paid = models.IntegerField(initial=0)
 
 
 # FUNCTIONS
@@ -100,7 +121,8 @@ class Bid1(Page):
        player.payoff_3 = C.PAYOFFS[player.round_number][player.stock_3]  # The payoff of the frist stock that can be purchased after period 3.
        player.payoff_3_2 = C.PAYOFFS[player.round_number][player.stock_3_2]  # The payoff of the second stock that can be purchased after period 3.
 
-
+       player.curr_payoff_3 = C.PROJ_PAYOFF_3[player.round_number][player.stock_3]
+       player.curr_payoff_3_2 = C.PROJ_PAYOFF_3[player.round_number][player.stock_3_2]
 
        return dict(
           image_path1= 'stock_experiment_cliff_nelson/stock_movements00_{}_part1.jpg'.format(player.round_number),
@@ -118,6 +140,9 @@ class Bid2(Page):
         player.payoff_6 = C.PAYOFFS[player.round_number][player.stock_6]  # The payoff of the frist stock that can be purchased after period 3.
         player.payoff_6_2 = C.PAYOFFS[player.round_number][player.stock_6_2]  # The payoff of the second stock that can be purchased after period 3.
 
+        player.curr_payoff_6 = C.PROJ_PAYOFF_6[player.round_number][player.stock_6]
+        player.curr_payoff_6_2 = C.PROJ_PAYOFF_6[player.round_number][player.stock_6_2]
+
         return dict(
             image_path1= 'stock_experiment_cliff_nelson/stock_movements00_{}_part2.jpg'.format(player.round_number),
             image_path2='stock_experiment_cliff_nelson/stock_movements00_{}_part2_graph.jpg'.format(player.round_number)
@@ -134,7 +159,7 @@ class Results1(Page):
         if purchase_3:
             player.price_3 = ran_int
             player.shares_acquired_3 = 1
-            player.cash_balance -= player.price_3
+            #player.cash_balance -= player.price_3
             statement = "Since " + str(ran_int) +" is less than or equal to your bid, you puchased 1 share of stock " + player.stock_3 + " at the price of " + str(player.price_3) +"."
         else:
             player.shares_acquired_3 = 0
@@ -144,9 +169,9 @@ class Results1(Page):
         purchase_3_2 = (ran_int_2<=player.bid_3_2)
 
         if purchase_3_2:
-            player.price_3_2
+            player.price_3_2 = ran_int_2
             player.shares_acquired_3_2 = 1
-            player.cash_balance -= player.price_3_2
+            #player.cash_balance -= player.price_3_2
             statement_2 = "Since " + str(ran_int_2) +" is less than or equal to your bid, you puchased 1 share of stock " + player.stock_3_2 + " at the price of " + str(player.price_3_2) +"."
         else:
             player.shares_acquired_3_2 = 0
@@ -170,7 +195,7 @@ class Results2(Page):
         if purchase_6:
             player.price_6 = ran_int
             player.shares_acquired_6 = 1
-            player.cash_balance -= player.price_6
+            #player.cash_balance -= player.price_6
             statement = "Since " + str(ran_int) +" is less than or equal to your bid, you puchased 1 share of stock " + player.stock_6 + " at the price of " + str(player.price_6) +"."
         else:
             player.shares_acquired_6 = 0
@@ -182,7 +207,7 @@ class Results2(Page):
         if purchase_6_2:
             player.price_6_2 = ran_int_2
             player.shares_acquired_6_2 = 1
-            player.cash_balance -= player.price_6_2
+            #player.cash_balance -= player.price_6_2
             statement_2 = "Since " + str(ran_int_2) +" is less than or equal to your bid, you puchased 1 share of stock " + player.stock_6_2 + " at the price of " + str(player.price_6_2) +"."
         else:
             player.shares_acquired_6_2 = 0
@@ -208,7 +233,7 @@ class CombinedResults(Page):
         player.earnings_6 = player.payoff_6 * player.shares_acquired_6 - player.price_6
         player.earnings_6_2 = player.payoff_6_2 * player.shares_acquired_6_2  - player.price_6_2
 
-        player.amount_paid = C.CREDIT - player.cash_balance
+        #player.amount_paid = C.CREDIT - player.cash_balance
 
         player.earnings = player.earnings_3 + player.earnings_3_2 + player.earnings_6 + player.earnings_6_2
 
@@ -225,6 +250,7 @@ class CombinedResults(Page):
             player.participant.vars['final_earnings'] = player.final_earnings
         else:                                                # The current app goes second.  Adds to the participant variable 'final_earnings'.
             player.final_earnings = player.participant.vars['final_earnings'] + player.final_earnings
+            player.participant.vars['final_earnings'] = player.final_earnings
 
         return dict(
             image_path= 'stock_experiment_cliff_nelson/stock_movements00_{}_part3.jpg'.format(player.round_number)
