@@ -22,27 +22,27 @@ resp = requests.get(url, headers=headers)
 number = round(random.randint(0,1))  # Change this at random
 
 
-number = 1
+# number = 1    # Put 1 if you want superstars to come first
 
 
 app_1 = ""
 app_2 = ""
 if number == 1:
-    app_1 = 'stock_experiment_cliff_nelson'                 # Superstar stocks are possible in this app.
-    app_2 = 'stock_experiment_cliff_nelson_no_superstars'   # Superstar stocks are not possible in this app.
+    app_1 = 'asset_experiment_cliff_nelson'                 # Superstar assets are possible in this app.
+    app_2 = 'asset_experiment_cliff_nelson_no_superstars'   # Superstar assets are not possible in this app.
     print("Superstars.")
 elif number == 0:
-    app_1 = 'stock_experiment_cliff_nelson_no_superstars'
-    app_2 = 'stock_experiment_cliff_nelson'
+    app_1 = 'asset_experiment_cliff_nelson_no_superstars'
+    app_2 = 'asset_experiment_cliff_nelson'
     print("No superstars.")
 
 
 
 SESSION_CONFIGS = [
     dict(
-        name='stock_experiment_cliff_nelson',
-        display_name="Stock Experiment",
-        app_sequence=['directions', app_1, app_2, 'final_instructions'], #In full version, add 'directions',
+        name='asset_experiment_cliff_nelson',
+        display_name="Asset Experiment",
+        app_sequence=['consent_form', 'directions', app_1, app_2, 'final_instructions'], #In full version, add 'consent_form', 'directions', ,
         num_demo_participants=20,
         number=number,
     ),
@@ -73,7 +73,8 @@ SESSION_CONFIG_DEFAULTS = dict(
 
 PARTICIPANT_FIELDS = [
     'round',
-    'final_earnings'
+    'final_earnings',
+    'final_earnings_app2'
 ]
 SESSION_FIELDS = []
 
