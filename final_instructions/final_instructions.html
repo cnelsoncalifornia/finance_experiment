@@ -8,13 +8,15 @@
 
     <p> Your cumulative earnings for this experiment was {{ player.final_earnings }}. </p>
 
-    <p> Each experimental currency unit is worth ${{ C.CONVERSION_TO_USD }}0. </p>
+    <p> Each experimental currency unit is worth ${{ C.CONVERSION_TO_USD }}. </p>
 
     <p> Your final payment is ${{ player.final_earnings_usd }} or $15.50, whichever is greater.  </p>
 
     <p> Please let the administrator know that you are done and are ready to collect your payment. </p>
 
-    <p> This is a demo only, no payment will be given. </p>
+    {{ formfields }}
+
+    {{ next_button }}
 
 
 {{ endblock }}

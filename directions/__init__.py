@@ -9,7 +9,7 @@ class C(BaseConstants):
     NAME_IN_URL = 'directions_test'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
-    MAX_FAILED_ATTEMPTS = 4
+    MAX_FAILED_ATTEMPTS = 50
 
 
 class Subsession(BaseSubsession):
@@ -25,46 +25,45 @@ class Player(BasePlayer):
     failed_too_many = models.BooleanField(initial=False)
     fixed = models.StringField(
         choices=[['Yes', 'Yes'], ['No', 'No']],
-        label='Can a superstar stock become a regular stock?',
+        label='Can a superstar asset become a regular asset?',
         widget=widgets.RadioSelect,
     )
     bid_question1 = models.IntegerField(
-        label='If you bid 15 and the random number is 11, what price do you pay for the stock?'
+        label='If you bid 15 and the random number is 11, what price do you pay for the asset?'
     )
     bid_question2 = models.StringField(
         choices=[['Yes', 'Yes'], ['No', 'No']],
-        label='If you bid 5 and the random number is 8, do you purchase the stock?',
+        label='Do you purchase the asset if you bid 5 and the random number is 8?',
         widget=widgets.RadioSelect,
     )
     prob_question1 = models.IntegerField(
         label='''
-        If a regular stock has increased 3 periods in a row, what is the probability that 
-        it will increase next round?  Enter as a percentage.''',
+        If a regular asset has increased 3 periods in a row, what is the probability that 
+        it will increase next period?  Enter as a percentage.''',
         min=0, max=100
     )
     prob_question2 = models.IntegerField(
         label='''
-        If a regular stock has decreased 6 rounds in a row, what is the probability that it will decrease next round?  
+        If a regular asset has decreased 6 periods in a row, what is the probability that it will decrease next period?  
         Enter as a percentage.''',
         min=0, max=100
     )
     payoff_question = models.StringField(
         choices=[['True', 'True'], ['False', 'False']],
-        label='True or False: The payoff of a stock is the number that appears on the 10th period of the round.',
+        label='True or False: The payoff of any asset is unknown until the 10th period of the round.',
         widget=widgets.RadioSelect,
     )
     superstars_possible = models.StringField(
         choices=[['True', 'True'], ['False', 'False']],
         label='''
-        True or False: In some rounds, superstar stocks are possible and in other rounds superstar stocks 
-        are not possible.''',
+        True or False: In some rounds, superstar assets are possible, and in other rounds, superstar assets are not possible.''',
         widget=widgets.RadioSelect,
     )
     prob_superstar = models.IntegerField(
+        choices=[['1', '1'], ['2', '2'], ['5', '5'], ['10', '10'], ['20', '20']],
         label='''
-        In those rounds in which superstar stocks are possible, what is the probability of any stock being created 
-        a superstar?  Enter as a percentage.''',
-        min=0, max=100
+        Suppose you are in a round in which superstar assets are possible.  What is the probability that any given asset was created as a superstar?  Enter as a percentage.''',
+        widget=widgets.RadioSelect,
     )
 
 class Directions(Page):
