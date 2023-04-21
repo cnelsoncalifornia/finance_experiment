@@ -25,7 +25,7 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     final_earnings = models.IntegerField(initial=0)
     final_earnings_usd = models.FloatField(initial=0)
-    previous_participation = models.StringField(
+    first_participation = models.StringField(   # This variable use to be called previous_participation
         choices=[['Yes', 'Yes'], ['No', 'No']],
         label='Is this your first time doing this experiment?',
         widget=widgets.RadioSelect,
@@ -49,12 +49,14 @@ class Player(BasePlayer):
         Optional: Feel free to put any suggestions for how to make this experiment better.''',
     )
 
+    first_app = models.StringField(initial='')
+
 
 # FUNCTIONS
 # PAGES
 class previous_participation(Page):
     form_model = 'player'
-    form_fields = ['previous_participation','stock_experience','econ_knowledge']
+    form_fields = ['first_participation','stock_experience','econ_knowledge']
 
 
 class final_instructions(Page):
@@ -62,8 +64,13 @@ class final_instructions(Page):
     form_fields = ['strategy_from_subjects', 'comments_from_subjects']
     @staticmethod
     def vars_for_template(player: Player):
-        player.final_earnings = player.participant.vars['final_earnings'] + player.participant.vars['final_earnings_app2']
+        player.final_earnings = player.participant.vars['final_earnings'] + player.participant.vars['final_earnings_app2'] + player.participant.vars['final_earnings_bonus']
         player.final_earnings_usd = player.final_earnings * C.CONVERSION_TO_USD
+
+        if player.subsession.session.config['number'] == 1:  # The current app goes first.  There are no rounds from the other app.
+            player.first_app = 'superstars'
+        else:                                                # The current app goes second.  Adds the rounds from the other app.
+            player.first_app = 'no superstars'
 
 
 
