@@ -34,42 +34,42 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     prob_3 = models.IntegerField(label='',min=0,max=100)
-    prob_3_2= models.IntegerField(label='',min=0,max=100)
+#    prob_3_2= models.IntegerField(label='',min=0,max=100)
     bid_3 = models.IntegerField(label='', min=0, max=20)
-    bid_3_2 = models.IntegerField(label='', min=0, max=20)
+#    bid_3_2 = models.IntegerField(label='', min=0, max=20)
     price_3 = models.IntegerField(initial = 0)
-    price_3_2 = models.IntegerField(initial = 0)
+#    price_3_2 = models.IntegerField(initial = 0)
     curr_payoff_3 = models.IntegerField(initial = 0) # Projected payoff after period 3 of first asset.
-    curr_payoff_3_2 = models.IntegerField(initial = 0)
+#    curr_payoff_3_2 = models.IntegerField(initial = 0)
     shares_acquired_3 = models.IntegerField(initial=0)  # Shares acquired in the first purchase after period 3.
-    shares_acquired_3_2 = models.IntegerField(initial=0)  # Shares acquired in the second purchase after period 3.
+#    shares_acquired_3_2 = models.IntegerField(initial=0)  # Shares acquired in the second purchase after period 3.
     acquired_3 = models.StringField(initial = 'No') # Yes if shares_aquired_3 is 1, otherwise No.
-    acquired_3_2 = models.StringField(initial = 'No') # Yes if shares_aquired_3_2 is 1, otherwise No.
+#    acquired_3_2 = models.StringField(initial = 'No') # Yes if shares_aquired_3_2 is 1, otherwise No.
     payoff_3 = models.IntegerField(initial=0) # Payoff for the first asset purchased after round 3.
-    payoff_3_2 = models.IntegerField(initial=0)  # Payoff for the second asset purchased after round 3.
+#    payoff_3_2 = models.IntegerField(initial=0)  # Payoff for the second asset purchased after round 3.
     earnings_3 = models.IntegerField(initial=0)  # payoff_3 * shares_acquired_3 - price_3
-    earnings_3_2 = models.IntegerField(initial=0)  # payoff_3_2 * shares_acquired_3_2 - price_3_2
+#    earnings_3_2 = models.IntegerField(initial=0)  # payoff_3_2 * shares_acquired_3_2 - price_3_2
     guess_3 = models.IntegerField(label='')  # Subject's guess for the final payout of the first asset they bid on in the first market.
-    guess_3_2 = models.IntegerField(label='')
+#    guess_3_2 = models.IntegerField(label='')
 
     prob_6 = models.IntegerField(label='',min=0,max=100)
-    prob_6_2= models.IntegerField(label='',min=0,max=100)
+#    prob_6_2= models.IntegerField(label='',min=0,max=100)
     bid_6 = models.IntegerField(label='', min=0, max=20)
-    bid_6_2 = models.IntegerField(label='', min=0, max=20)
+#    bid_6_2 = models.IntegerField(label='', min=0, max=20)
     price_6 = models.IntegerField(initial = 0)
-    price_6_2 = models.IntegerField(initial = 0)
+#    price_6_2 = models.IntegerField(initial = 0)
     curr_payoff_6 = models.IntegerField(initial = 0) # Projected payoff after period 3 of first asset.
-    curr_payoff_6_2 = models.IntegerField(initial = 0)
+#    curr_payoff_6_2 = models.IntegerField(initial = 0)
     shares_acquired_6 = models.IntegerField(initial=0)  # Shares acquired in the first purchase after period 6.
-    shares_acquired_6_2 = models.IntegerField(initial=0)  # Shares acquired in the second purchase after period 6.
+#    shares_acquired_6_2 = models.IntegerField(initial=0)  # Shares acquired in the second purchase after period 6.
     acquired_6 = models.StringField(initial = 'No') # Yes if shares_aquired_6 is 1, otherwise No.
-    acquired_6_2 = models.StringField(initial = 'No') # Yes if shares_aquired_6_2 is 1, otherwise No.
+#    acquired_6_2 = models.StringField(initial = 'No') # Yes if shares_aquired_6_2 is 1, otherwise No.
     payoff_6 = models.IntegerField(initial=0) # Payoff for the first asset purchased after round 6.
-    payoff_6_2 = models.IntegerField(initial=0) # Payoff for the second asset purchased after round 6.
+#    payoff_6_2 = models.IntegerField(initial=0) # Payoff for the second asset purchased after round 6.
     earnings_6 = models.IntegerField(initial=0)
-    earnings_6_2 = models.IntegerField(initial=0)
+#    earnings_6_2 = models.IntegerField(initial=0)
     guess_6 = models.IntegerField(label='')  # Subject's guess for the final payout of the first asset they bid on in the second market.
-    guess_6_2 = models.IntegerField(label='')
+#    guess_6_2 = models.IntegerField(label='')
 
     earnings = models.IntegerField(initial=0) # Earnings for the round from asset payoffs.
     earnings_1 = models.IntegerField(initial=0) # Total earnings from the first market.
@@ -78,9 +78,9 @@ class Player(BasePlayer):
     earnings_from_guess_2 = models.IntegerField(initial=0)  # Earnings from correct payoff guesses in the first round. +/- 1 is okay.
 
     asset_3 = models.StringField(initial='') # Name of tne first asset that could be picked at the end of round 3.
-    asset_3_2 = models.StringField(initial='') # Name of the second asset that could be picked at the end of round 3.
+#    asset_3_2 = models.StringField(initial='') # Name of the second asset that could be picked at the end of round 3.
     asset_6 = models.StringField(initial='') # Name of asset that could be picked at the end of round 6.
-    asset_6_2 = models.StringField(initial='') # Name of asset that could be picked at the end of round 6.
+#    asset_6_2 = models.StringField(initial='') # Name of asset that could be picked at the end of round 6.
 
     final_earnings = models.IntegerField(initial=0)
 
