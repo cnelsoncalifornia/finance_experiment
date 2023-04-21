@@ -42,7 +42,7 @@ SESSION_CONFIGS = [
     dict(
         name='asset_experiment_cliff_nelson',
         display_name="Asset Experiment",
-        app_sequence=['consent_form', 'directions', app_1, app_2, 'final_instructions'], #In full version, add 'consent_form', 'directions', ,
+        app_sequence=['consent_form', 'directions', app_1, app_2, 'asset_experiment_with_distribution', 'final_instructions'],
         num_demo_participants=20,
         number=number,
     ),
@@ -74,7 +74,8 @@ SESSION_CONFIG_DEFAULTS = dict(
 PARTICIPANT_FIELDS = [
     'round',
     'final_earnings',
-    'final_earnings_app2'
+    'final_earnings_app2',
+    'final_earnings_bonus'
 ]
 SESSION_FIELDS = []
 
