@@ -22,7 +22,7 @@ resp = requests.get(url, headers=headers)
 number = round(random.randint(0,1))  # Change this at random
 
 
-# number = 1    # Put 1 if you want superstars to come first
+number = 1    # Put 1 if you want superstars to come first
 
 
 app_1 = ""
@@ -42,24 +42,10 @@ SESSION_CONFIGS = [
     dict(
         name='asset_experiment_cliff_nelson',
         display_name="Asset Experiment",
-        app_sequence=['consent_form', 'directions', app_1, app_2, 'asset_experiment_with_distribution', 'final_instructions'],
+        app_sequence=['consent_form', 'directions', app_1, app_2, 'final_instructions'], # 'consent_form', 'directions', app_1, app_2, 'asset_experiment_with_distribution'
         num_demo_participants=20,
         number=number,
     ),
-#    dict(
-#        name='trust_simple',
-#        display_name="Trust Simple",
-#        app_sequence=['trust_simple', 'payment_info'],
-#        num_demo_participants=2,
-#    ),
-#    dict(
-#        name='dictator',
-#        display_name="dictator",
-#        app_sequence=['dictator', 'payment_info'],
-#        num_demo_participants=2,
-#    ),
-
-
 ]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
