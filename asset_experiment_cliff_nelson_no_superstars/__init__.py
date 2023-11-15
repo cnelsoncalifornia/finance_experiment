@@ -4,39 +4,39 @@ import random
 class C(BaseConstants):
     NAME_IN_URL = 'survey_1'
     PLAYERS_PER_GROUP = None
-    NUM_ROUNDS = 1
+    NUM_ROUNDS = 5
     CREDIT = 80 # This is sufficient to cover the maximum bidding price of 20 in each of the 4 bidding decisions per round.
     MAX = 20 # Maximum bid.
     NAMES = {
-        1: ['I','A','M','C'],
-        2: ['G','A','E','A'],
-        3: ['A','H','B','H'],
-        4: ['J','A','J','A'],
-        5: ['J','B','N','B']
-    } # In round 1, the highest asset is A in market 1 and the lowest asset is H.  The highest asset in market 2 is B and the lowest is H.
+        1: ['A','B','O','A'],  # In round 1, the highest asset is A in market 1 and the lowest asset is B.  The highest asset in market 2 is D and the lowest is A.
+        2: ['I','A','I','A'],
+        3: ['A','C','L','C'],
+        4: ['D','C','G','C'],
+        5: ['D','B','A','E']
+    }
 
     PAYOFFS = {
-        1: {'A':6, 'C':10, 'I':12, 'M':12},
-        2: {'A':12, 'E':12, 'G': 6},
-        3: {'A': 12, 'B': 14, 'H': 2},
-        4: {'A': 10, 'J': 12},
-        5: {'B': 8, 'J': 14, 'N': 14}
+        1: {'A': 10, 'B': 10, 'O':16},
+        2: {'A': 12, 'I': 16},
+        3: {'A': 14, 'C': 4, 'L': 14},
+        4: {'C': 6, 'D': 12, 'G': 18},
+        5: {'A': 10, 'B': 12, 'D': 10, 'E': 2}
     }
 
     PROJ_PAYOFF_3 = {  # Projected payoffs in period 3.
-        1: {'A': 9, 'C': 11,'I': 13, 'M': 13},
-        2: {'A': 9, 'E': 11, 'G': 13},
-        3: {'A': 13, 'B': 13, 'H': 7},
-        4: {'A': 9, 'J': 13},
-        5: {'B': 7, 'J': 13, 'N': 13}
+        1: {'A': 11, 'B': 9},
+        2: {'A': 9, 'I': 13},
+        3: {'A': 11, 'C': 7},
+        4: {'C': 7, 'D': 14},
+        5: {'B': 7, 'D': 11}
     }
 
     PROJ_PAYOFF_6 = {  # Projected payoffs in period 6.
-        1: {'A': 8, 'C': 10,'I': 12, 'M': 14},
-        2: {'A': 10, 'E': 12, 'G': 10},
-        3: {'A': 12, 'B': 14, 'H': 4},
-        4: {'A': 8, 'J': 14},
-        5: {'B': 6, 'J': 12, 'N': 14}
+        1: {'A': 10, 'O': 14},
+        2: {'A': 10, 'I': 16},
+        3: {'C': 6, 'L': 14},
+        4: {'C': 6, 'G': 16},
+        5: {'A': 10, 'E': 6}
     }
 
 
@@ -119,7 +119,6 @@ class Intro(Page):
 
 
 class Bid1(Page):
-
     def vars_for_template(player: Player):
        player.asset_3 = C.NAMES[player.round_number][0]  # The name of the first asset that can be purchased after period 3.
        player.asset_3_2 = C.NAMES[player.round_number][1] # The name of the second asset that can be purchased after period 3.
@@ -131,8 +130,8 @@ class Bid1(Page):
        player.curr_payoff_3_2 = C.PROJ_PAYOFF_3[player.round_number][player.asset_3_2]
 
        return dict(
-          image_path1= 'asset_experiment_cliff_nelson/asset_movements00_{}_part1.jpg'.format(player.round_number),
-          image_path2='asset_experiment_cliff_nelson/asset_movements00_{}_part1_graph.jpg'.format(player.round_number),
+          image_path1= 'asset_experiment_cliff_nelson_2/asset_movements00_{}_part1.jpg'.format(player.round_number),
+          image_path2='asset_experiment_cliff_nelson_2/asset_movements00_{}_part1_graph.jpg'.format(player.round_number),
 
        )
     form_model = 'player'
@@ -150,8 +149,8 @@ class Bid2(Page):
         player.curr_payoff_6_2 = C.PROJ_PAYOFF_6[player.round_number][player.asset_6_2]
 
         return dict(
-            image_path1= 'asset_experiment_cliff_nelson/asset_movements00_{}_part2.jpg'.format(player.round_number),
-            image_path2='asset_experiment_cliff_nelson/asset_movements00_{}_part2_graph.jpg'.format(player.round_number)
+            image_path1= 'asset_experiment_cliff_nelson_2/asset_movements00_{}_part2.jpg'.format(player.round_number),
+            image_path2='asset_experiment_cliff_nelson_2/asset_movements00_{}_part2_graph.jpg'.format(player.round_number)
         )
     form_model = 'player'
     form_fields = ['guess_6','guess_6_2','bid_6','bid_6_2']
@@ -275,7 +274,7 @@ class CombinedResults(Page):
 
 
         return dict(
-            image_path= 'asset_experiment_cliff_nelson/asset_movements00_{}_part3.jpg'.format(player.round_number)
+            image_path= 'asset_experiment_cliff_nelson_2/asset_movements00_{}_part3.jpg'.format(player.round_number)
         )
 
 page_sequence = [Intro, Bid1 , Results1, Bid2, Results2, CombinedResults]
