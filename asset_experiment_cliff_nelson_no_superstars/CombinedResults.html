@@ -1,7 +1,7 @@
 {{ block title }}Experimental Results So Far{{ endblock }}
 {{ block content }}
 
-    <p> This chart shows the final payout of the assets with the ones you had an opportunity to purchase highlighted. </p>
+    <p> This chart shows the final payoff of the assets with the ones you had an opportunity to purchase highlighted. </p>
 
     <img src="{{ static image_path }}"/>   <br> <br>
 
@@ -33,7 +33,7 @@
 <br>
 
     <p> You earned {{ player.earnings_3 }} from asset {{ player.asset_3}} and {{ player.earnings_3_2 }} from
-    {{ player.asset_3_2}}.  The earnings for each asset you acquired is the difference between the asset's payout
+    {{ player.asset_3_2}}.  The earnings for each asset you acquired is the difference between the asset's payoff
     and the price you paid.</p>
 
     <table style="width:80%">
@@ -56,7 +56,7 @@
 <br>
 
 
-    <p> Additionally, since {{ player.earnings_from_guess_1 }} of your guesses were within 1 of the payout,
+    <p> Additionally, since {{ player.earnings_from_guess_1 }} of your guesses were within 1 of the payoff,
     you earned {{ player.earnings_from_guess_1 }} in this market for correct guesses.</p>
 
     <p> In this market you earned {{ player.earnings_1 }} (= {{ player.earnings_3 }} + {{ player.earnings_3_2 }} +

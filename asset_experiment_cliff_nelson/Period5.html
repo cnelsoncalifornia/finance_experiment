@@ -1,0 +1,58 @@
+{{ block content }}
+
+    <p>
+        In this round, superstar assets are possible.
+
+        For now, only 5 of the 10 periods are revealed.
+
+    </p>
+
+    <p>
+
+        Regular assets move up 1 with 50% probability.
+
+    </p>
+
+    <p>
+
+        Superstar assets move up 1 with 99% probability.
+
+    </p>
+
+    <img src="{{ static image_path1 }}"/>   <br> <br>
+
+    <img src="{{ static image_path2 }}"/>   <br> <br>
+
+    <p>
+        You will answer questions about the two highlighted assets.
+    </p>
+
+    <p>
+        Each one of these assets was given a 2% chance of being a superstar when they were created.
+
+        Now, given the history so far, give your best guess for the updated chance that they are superstars.
+
+        Entering 0 means there is no chance and entering 100 means that it is certain.
+    </p>
+
+    <p>
+        The chance that asset {{ player.asset_5 }} is a superstar (you might get +5 for an accurate guess):
+
+      {{ formfield 'prob_5'}}
+    </p>
+
+    <p>
+        The chance that asset {{ player.asset_5_2 }} is a superstar (you might get +5 for an accurate guess):
+    </p>
+       {{ formfield 'prob_5_2'}}
+
+
+
+
+
+
+
+
+    {{ next_button }}
+
+{{ endblock }}

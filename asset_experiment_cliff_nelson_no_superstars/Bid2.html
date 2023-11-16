@@ -9,9 +9,11 @@
     </p>
 
     <p>
-        Regular assets move +1 with 50% probability.
+
+        Regular assets have an equal chance of moving up 1 and down 1 each period.
 
     </p>
+
 
     <img src="{{ static image_path1 }}"/>   <br> <br>
 
@@ -23,24 +25,24 @@
     </p>
 
     <p>
-        The probability that asset {{ player.asset_6 }} is a superstar:
+        The chance that asset {{ player.asset_6 }} is a superstar:
     </p>
         0
     <br>
 
     <p>
-        The probability that the asset {{ player.asset_6_2 }} is a superstar:
+        The chance that the asset {{ player.asset_6_2 }} is a superstar:
     </p>
         0
     <br>
 
     <p>
-        Give your best guess for the final payout in Period 10 for asset {{ player.asset_6 }} (+1 if you get it right):
+        Give your best guess for the final payoff in Period 10 for asset {{ player.asset_6 }} (+1 if you get it right):
     </p>
         {{ formfield 'guess_6'}}
 
     <p>
-        Give your best guess for the final payout in Period 10 for asset {{ player.asset_6_2 }} (+1 if you get it right):
+        Give your best guess for the final payoff in Period 10 for asset {{ player.asset_6_2 }} (+1 if you get it right):
     </p>
         {{ formfield 'guess_6_2'}}
 

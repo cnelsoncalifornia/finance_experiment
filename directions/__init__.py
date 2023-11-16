@@ -38,13 +38,13 @@ class Player(BasePlayer):
     )
     prob_question1 = models.IntegerField(
         label='''
-        If a regular asset has increased 3 periods in a row, what is the probability that 
+        If a regular asset has increased 3 periods in a row, what is the chance that 
         it will increase next period?  Enter as a percentage.''',
         min=0, max=100
     )
     prob_question2 = models.IntegerField(
         label='''
-        If a regular asset has decreased 6 periods in a row, what is the probability that it will decrease next period?  
+        If a regular asset has decreased 6 periods in a row, what is the chance that it will decrease next period?  
         Enter as a percentage.''',
         min=0, max=100
     )
@@ -62,7 +62,7 @@ class Player(BasePlayer):
     prob_superstar = models.IntegerField(
         choices=[['1', '1'], ['2', '2'], ['5', '5'], ['10', '10'], ['20', '20']],
         label='''
-        Suppose you are in a round in which superstar assets are possible.  What is the probability that any given asset was created as a superstar?  Enter as a percentage.''',
+        Suppose you are in a round in which superstar assets are possible.  What is the chance that any given asset was created as a superstar?  Enter as a percentage.''',
         widget=widgets.RadioSelect,
     )
 

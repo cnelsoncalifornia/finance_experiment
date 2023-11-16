@@ -9,13 +9,14 @@
     </p>
 
     <p>
-        Regular assets move +1 with 50% probability.
+
+        Regular assets have an equal chance of moving up 1 and down 1 each period.
 
     </p>
 
     <p>
 
-        Superstar assets move +1 with 99% probability.
+        Superstar assets have a 99% chance of moving up 1 each period.
 
     </p>
 
@@ -37,24 +38,24 @@
     </p>
 
     <p>
-        The probability that asset {{ player.asset_6 }} is a superstar (you might get +5 for an accurate guess):
+        The chance that asset {{ player.asset_6 }} is a superstar (you might get +5 for an accurate guess):
 
       {{ formfield 'prob_6'}}
     </p>
 
     <p>
-        The probability that the asset {{ player.asset_6_2 }} is a superstar (you might get +5 for an accurate guess):
+        The chance that the asset {{ player.asset_6_2 }} is a superstar (you might get +5 for an accurate guess):
     </p>
        {{ formfield 'prob_6_2'}}
 
 
     <p>
-        Give your best guess for the final payout in Period 10 for asset {{ player.asset_6 }} (+1 if you get it right):
+        Give your best guess for the final payoff in Period 10 for asset {{ player.asset_6 }} (+1 if you get it right):
     </p>
         {{ formfield 'guess_6'}}
 
     <p>
-        Give your best guess for the final payout in Period 10 for asset {{ player.asset_6_2 }} (+1 if you get it right):
+        Give your best guess for the final payoff in Period 10 for asset {{ player.asset_6_2 }} (+1 if you get it right):
     </p>
         {{ formfield 'guess_6_2'}}
 

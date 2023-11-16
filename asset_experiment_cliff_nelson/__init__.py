@@ -169,7 +169,7 @@ class Bid1(Page):
     form_fields = ['prob_3','prob_3_2','guess_3','guess_3_2','bid_3','bid_3_2']
 
 
-class Round4(Page):
+class Period4(Page):
     def vars_for_template(player: Player):
 
         player.asset_4 = C.NAMES[player.round_number][2] # The name of the first (highest) asset that subjects guess the prob for after period 4.
@@ -187,7 +187,7 @@ class Round4(Page):
     form_model = 'player'
     form_fields = ['prob_4', 'prob_4_2']
 
-class Round5(Page):
+class Period5(Page):
     def vars_for_template(player: Player):
 
         player.asset_5 = C.NAMES[player.round_number][4] # The name of the first (highest) asset that subjects guess the prob for after period 4.
@@ -353,4 +353,4 @@ class CombinedResults(Page):
             image_path= 'asset_experiment_cliff_nelson_2/asset_movements_{}_part3.jpg'.format(player.round_number)
         )
 
-page_sequence = [Intro, Bid1 , Results1, Round4, Round5, Bid2, Results2, CombinedResults]
+page_sequence = [Intro, Bid1 , Results1, Period4, Period5, Bid2, Results2, CombinedResults]
