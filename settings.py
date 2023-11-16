@@ -19,10 +19,10 @@ headers["Expires"] = "0"
 resp = requests.get(url, headers=headers)
 #End clear cache code block.
 
-number = round(random.randint(0,1))  # Change this at random
+number = round(random.randint(0,1))  # Change this at random.  This determines which app comes first.
 
 
-number = 1    # Put 1 if you want superstars to come first
+#number = 1    # Put 1 if you want superstars to come first
 
 
 app_1 = ""
@@ -73,22 +73,6 @@ LANGUAGE_CODE = 'en'
 REAL_WORLD_CURRENCY_CODE = 'USD'
 USE_POINTS = True
 
-ROOMS = [
-    dict(
-        name='econ101',
-        display_name='Econ 101 class',
-        participant_label_file='_rooms/econ101.txt',
-    ),
-    dict(name='live_demo', display_name='Room for live demo (no participant labels)'),
-]
-
-ADMIN_USERNAME = 'admin'
-# for security, best to set admin password in an environment variable
-ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
-
-DEMO_PAGE_INTRO_HTML = """
-Here are some oTree games.
-"""
 
 
 SECRET_KEY = '7829773786560'

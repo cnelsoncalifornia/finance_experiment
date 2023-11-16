@@ -301,14 +301,15 @@ class CombinedResults(Page):
     @staticmethod
     def vars_for_template(player: Player):
 
-        player.participant.vars['prob_3'] = player.prob_3
-        player.participant.vars['prob_3_2'] = player.prob_3_2
-        player.participant.vars['prob_4'] = player.prob_4
-        player.participant.vars['prob_4_2'] = player.prob_4_2
-        player.participant.vars['prob_5'] = player.prob_5
-        player.participant.vars['prob_5_2'] = player.prob_5_2
-        player.participant.vars['prob_6'] = player.prob_6
-        player.participant.vars['prob_6_2'] = player.prob_6_2
+        if player.round_number == 4:   # 4 was the randomly generated number between 1 and 5.
+            player.participant.vars['prob_3'] = player.prob_3
+            player.participant.vars['prob_3_2'] = player.prob_3_2
+            player.participant.vars['prob_4'] = player.prob_4
+            player.participant.vars['prob_4_2'] = player.prob_4_2
+            player.participant.vars['prob_5'] = player.prob_5
+            player.participant.vars['prob_5_2'] = player.prob_5_2
+            player.participant.vars['prob_6'] = player.prob_6
+            player.participant.vars['prob_6_2'] = player.prob_6_2
 
         player.earnings_3 = player.payoff_3 * player.shares_acquired_3 - player.price_3
         player.earnings_3_2 = player.payoff_3_2 * player.shares_acquired_3_2 - player.price_3_2
