@@ -1,0 +1,5 @@
+This version represents a new random draw of assets.  The colors in the first market are reversed from the original draw.  For instance, the highest asset is now colored cyan and the lowest
+is now colored green in the first market.  The second market use to have blue and gold, but here all markets have cyan and green.
+
+Additionally, there is now a table and a graph of the potentially superstar assets at periods 4 and 5.  The highlighted assets are the one that increased the most and the one that increased 
+second most.  If there are two that are tied for increasing the most (or second most), the one that is picked is the one that comes first in alphabetical order.
