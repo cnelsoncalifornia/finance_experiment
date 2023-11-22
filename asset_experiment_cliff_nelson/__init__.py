@@ -16,7 +16,7 @@ class C(BaseConstants):
     }
 
     PAYOFFS = {
-        1: {'B': 8, 'C': 14, 'G': 14, 'M': 12, 'I': 10},
+        1: {'B': 8, 'C': 14, 'M': 12, 'I': 10},
         2: {'A': 6, 'C': 16, 'D': 10,'K': 18},
         3: {'D': 6, 'I': 14, 'K': 16, 'N': 6},
         4: {'H': 12, 'I': 6},
@@ -24,7 +24,7 @@ class C(BaseConstants):
     }
 
     PROJ_PAYOFF_3 = { # Projected payoffs in period 3.
-        1: {'B': 9, 'C': 13, 'M': 13},
+        1: {'B': 9, 'C': 13}, 
         2: {'A': 9, 'C': 13},
         3: {'I': 13, 'N': 7},
         4: {'H': 11, 'I': 7},
@@ -40,7 +40,7 @@ class C(BaseConstants):
     }
 
     PROJ_PAYOFF_5 = { # Projected payoffs in period 5.
-        1: {'A': 14, 'B': 8, 'C':14, 'G': 11, 'M': 14},
+        1: {'A': 13, 'G': 11},
         2: {'C': 15, 'I': 13},
         3: {'A': 13, 'K': 15},
         4: {'H': 13, 'G': 11},
@@ -49,7 +49,7 @@ class C(BaseConstants):
 
 
     PROJ_PAYOFF_6 = { # Projected payoffs in period 6.
-        1: {'B': 6, 'C': 12, 'M': 14, 'I': 10},
+        1: {'M': 14, 'I': 10},
         2: {'D': 10, 'K': 16},
         3: {'K': 16, 'D': 8},
         4: {'H': 14, 'I': 6},
