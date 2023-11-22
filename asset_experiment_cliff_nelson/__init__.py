@@ -32,7 +32,7 @@ class C(BaseConstants):
     }
 
     PROJ_PAYOFF_4 = { # Projected payoffs in period 4.
-        1: {'A': 14, 'B': 8, 'C':14, 'M': 14},
+        1: {'A': 12, 'C': 14},
         2: {'C': 14, 'I': 12},
         3: {'A': 12, 'I': 14},
         4: {'H': 12, 'E': 10},
