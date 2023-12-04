@@ -2,7 +2,7 @@
 {{ block content }}
 
     <p>
-        In this round, superstar assets are not possible.
+        In this round, superstar assets are possible.
 
         For now, only 3 of the 10 periods are revealed.
 
@@ -14,6 +14,11 @@
 
     </p>
 
+    <p>
+
+        Superstar assets have a 99% chance of moving up 1 each period.
+
+    </p>
 
     <img src="{{ static image_path1 }}"/>   <br> <br>
 
@@ -24,14 +29,24 @@
     </p>
 
     <p>
-        The chance that asset {{ player.asset_3 }} is a superstar:
+        Each one of these assets was given a 2% chance of being a superstar when they were created.
+
+        Now, given the history so far, give your best guess for the updated chance that they are superstars.
+
+        Entering 0 means there is no chance and entering 100 means that it is certain.
     </p>
-        0
+
+    <p>
+        The chance that asset {{ player.asset_3 }} is a superstar:
+
+      {{ formfield 'prob_3'}}
+    </p>
 
     <p>
         The chance that asset {{ player.asset_3_2 }} is a superstar:
     </p>
-        0
+       {{ formfield 'prob_3_2'}}
+
 
     <p>
         Give your best guess for the final payoff in Period 10 for asset {{ player.asset_3 }} (+1 if your guess is within 1 of the actual value):

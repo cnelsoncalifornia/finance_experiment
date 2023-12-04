@@ -120,7 +120,7 @@ class final_instructions(Page):
         player.prob_6 = player.participant.vars['prob_6']
         player.prob_6_2 = player.participant.vars['prob_6_2']
 
-        player.bprob_3 = 14 # 3 of 3 growth
+        player.bprob_3 = 14 # 3 of 3 growth (Bayesian probability)
         player.bprob_3_2 = 0  # 1 of 3 growth
         player.bprob_4 = 24  # 4 of 4 growth
         player.bprob_4_2 = 0  # 3 of 4 growth
@@ -156,14 +156,14 @@ class final_instructions(Page):
 
         player.total_prob_earnings = player.earn_3 + player.earn_3_2 + player.earn_4 + player.earn_4_2 + player.earn_5 + player.earn_5_2 + player.earn_6 + player.earn_6_2
 
-        player.earnings = player.participant.vars['final_earnings'] + player.participant.vars['final_earnings_app2'] #+ player.participant.vars['final_earnings_bonus']
+        player.earnings = player.participant.vars['final_earnings'] + player.participant.vars['final_earnings_app2'] + player.participant.vars['final_earnings_bonus']
 
         player.total_earnings = player.earnings + player.total_prob_earnings
         player.total_earnings_usd = player.total_earnings * C.CONVERSION_TO_USD
 
-        if player.subsession.session.config['number'] == 1:  # The current app goes first.  There are no rounds from the other app.
+        if player.subsession.session.config['ss_first'] == 1:
             player.first_app = 'superstars'
-        else:                                                # The current app goes second.  Adds the rounds from the other app.
+        else:
             player.first_app = 'no superstars'
 
 

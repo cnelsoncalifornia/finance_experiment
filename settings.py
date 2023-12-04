@@ -19,19 +19,19 @@ headers["Expires"] = "0"
 resp = requests.get(url, headers=headers)
 #End clear cache code block.
 
-number = round(random.randint(0,1))  # Change this at random.  This determines which app comes first.
+ss_first = round(random.randint(0,1))  # Change this at random.  This determines which app comes first.
 
 
-#number = 1    # Put 1 if you want superstars to come first
+#ss_first = 1    # Put 1 if you want superstars to come first
 
 
 app_1 = ""
 app_2 = ""
-if number == 1:
+if ss_first == 1:
     app_1 = 'asset_experiment_cliff_nelson'                 # Superstar assets are possible in this app.
     app_2 = 'asset_experiment_cliff_nelson_no_superstars'   # Superstar assets are not possible in this app.
     print("Superstars.")
-elif number == 0:
+elif ss_first == 0:
     app_1 = 'asset_experiment_cliff_nelson_no_superstars'
     app_2 = 'asset_experiment_cliff_nelson'
     print("No superstars.")
@@ -42,9 +42,9 @@ SESSION_CONFIGS = [
     dict(
         name='asset_experiment_cliff_nelson',
         display_name="Asset Experiment",
-        app_sequence=['consent_form', 'directions', app_1, app_2, 'final_instructions'], # 'consent_form', 'directions', app_1, app_2, 'asset_experiment_with_distribution'
+        app_sequence=['consent_form', 'directions', app_1, app_2, 'asset_experiment_cliff_nelson_7_13', 'final_instructions'], # 'asset_experiment_no_superstars_7_13', 'asset_experiment_cliff_nelson_7_13',
         num_demo_participants=20,
-        number=number,
+        ss_first=ss_first,
     ),
 ]
 

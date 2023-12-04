@@ -107,7 +107,7 @@ class Player(BasePlayer):
 # PAGES
 class Intro(Page):
     def vars_for_template(player: Player):
-        if player.subsession.session.config['number'] == 0:  # The current app goes first.  There are no rounds from the other app.
+        if player.subsession.session.config['ss_first'] == 0:  # The current app goes first.  There are no rounds from the other app.
             current_round = player.round_number
         else:                                                # The current app goes second.  Adds the rounds from the other app.
             current_round = player.round_number + 5
@@ -266,7 +266,7 @@ class CombinedResults(Page):
         for temp_player in all_players:
             player.final_earnings += temp_player.earnings
 
-        if player.subsession.session.config['number'] == 0:  # The current app goes first.  Defines the participant variable 'final_earnings'.
+        if player.subsession.session.config['ss_first'] == 0:  # The current app goes first.  Defines the participant variable 'final_earnings'.
             player.participant.vars['final_earnings'] = player.final_earnings
         else:                                                # The current app goes second.  Adds to the participant variable 'final_earnings'.
             player.participant.vars['final_earnings_app2'] = player.final_earnings
