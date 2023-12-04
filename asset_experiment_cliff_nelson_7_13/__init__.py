@@ -171,6 +171,8 @@ class CombinedResults(Page):
 
         player.participant.vars['final_earnings_bonus'] = player.final_earnings
 
+        player.final_earnings = player.final_earnings + player.participant.vars['final_earnings'] + player.participant.vars['final_earnings_app2']
+
 
         return dict(
             image_path= 'asset_experiment_cliff_nelson_7_13/asset_movements_{}_part3.jpg'.format(player.round_number)
