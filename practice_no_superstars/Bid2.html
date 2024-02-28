@@ -1,0 +1,61 @@
+{{ block title }}Practice Round: Second Market{{ endblock }}
+{{ block content }}
+
+    <p>
+        In this round, superstar assets are not possible.
+
+        These are the same assets with 6 of the 10 periods now revealed.
+
+    </p>
+
+    <p>
+
+        Regular assets have an equal chance of moving up 1 and down 1 each period.
+
+    </p>
+
+
+    <img src="{{ static image_path1 }}"/>   <br> <br>
+
+    <img src="{{ static image_path2 }}"/>   <br> <br>
+
+    <p>
+        You will answer questions about the two highlighted assets.
+    </p>
+
+    <p>
+        The chance that asset {{ player.asset_6 }} is a superstar:
+    </p>
+        0
+    <br>
+
+    <p>
+        The chance that the asset {{ player.asset_6_2 }} is a superstar:
+    </p>
+        0
+    <br>
+
+    <p>
+        Give your best guess for the final payoff in Period 10 for asset {{ player.asset_6 }} (+1 if you get it right):
+    </p>
+        {{ formfield 'guess_6'}}
+
+    <p>
+        Give your best guess for the final payoff in Period 10 for asset {{ player.asset_6_2 }} (+1 if you get it right):
+    </p>
+        {{ formfield 'guess_6_2'}}
+
+    <p>
+        What is the highest price you are willing to pay for one unit of asset {{ player.asset_6 }}?
+    </p>
+    {{ formfield 'bid_6' }}
+
+    <p>
+        What is the highest price you are willing to pay for one unit of asset {{ player.asset_6_2 }}?
+    </p>
+    {{ formfield 'bid_6_2' }}
+
+
+    {{ next_button }}
+
+{{ endblock }}
