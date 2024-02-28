@@ -23,7 +23,6 @@ ss_first = round(random.randint(0,1))  # This variable is changed at random.  It
 
 
 #ss_first = 1    # Put 1 if you want superstars to come first
-ss_first = 0
 
 app_1 = ""
 app_2 = ""
