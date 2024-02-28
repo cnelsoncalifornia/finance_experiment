@@ -47,7 +47,7 @@ SESSION_CONFIGS = [
     dict(
         name='asset_experiment_cliff_nelson',
         display_name="Asset Experiment",
-        app_sequence=[app_1_practice, app_2_practice, app_1, app_2, 'asset_experiment_cliff_nelson_7_13', 'final_instructions'], #  'consent_form', 'directions',   'loss_firms',
+        app_sequence=['consent_form', 'directions', app_1_practice, app_2_practice, app_1, app_2, 'asset_experiment_cliff_nelson_7_13', 'final_instructions'], #   'loss_firms',
         num_demo_participants=20,
         ss_first=ss_first,
     ),
