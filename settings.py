@@ -19,7 +19,7 @@ headers["Expires"] = "0"
 resp = requests.get(url, headers=headers)
 #End clear cache code block.
 
-ss_first = round(random.randint(0,1))  # Change this at random.  This determines which app comes first.
+ss_first = round(random.randint(0,1))  # This variable is changed at random.  It determines which app comes first.
 
 
 #ss_first = 1    # Put 1 if you want superstars to come first
@@ -48,7 +48,7 @@ SESSION_CONFIGS = [
     dict(
         name='asset_experiment_cliff_nelson',
         display_name="Asset Experiment",
-        app_sequence=['consent_form', 'directions', app_1_practice, app_2_practice, app_1, app_2, 'asset_experiment_cliff_nelson_7_13', 'final_instructions'], #    'loss_firms',
+        app_sequence=[app_1_practice, app_2_practice, app_1, app_2, 'asset_experiment_cliff_nelson_7_13', 'final_instructions'], #  'consent_form', 'directions',   'loss_firms',
         num_demo_participants=20,
         ss_first=ss_first,
     ),
@@ -84,3 +84,4 @@ USE_POINTS = True
 SECRET_KEY = '7829773786560'
 
 INSTALLED_APPS = ['otree']
+
