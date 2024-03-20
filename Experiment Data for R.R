@@ -15,8 +15,11 @@ path = "C:/Users/Cliff/Documents/Overvaluation Experiment/Experiment Data Files/
 file_names <- file.path(path, dir(path,pattern = ".csv"))
 
 library(statpsych)
+library(MASS)
 
 # Part 1
+
+first_experiment <- list() # "superstars" means subjects did 5 rounds where superstars are possible before any rounds in which they were not.
 
 stock_experience <- list() # Does the subject have experience in the stock market?
 econ_knowledge <- list() # Has the subject taken an economics class? 
@@ -316,6 +319,8 @@ curr_payoff_6_2_NoSS_5 <- list()
 for(i in 1:length(file_names)){
   data_temp <- read.csv(file_names[i])
   no_subjects <- length(data_temp$participant.code) # Number of subjects in that session.
+  
+  first_experiment_temp <- data_temp$final_instructions.1.player.first_app
   
   stock_experience_temp <- data_temp$final_instructions.1.player.stock_experience
   econ_knowledge_temp   <- data_temp$final_instructions.1.player.econ_knowledge
@@ -673,6 +678,8 @@ for(i in 1:length(file_names)){
   
 # Part 3  
   for(j in 1:no_subjects){
+    first_experiment <- append(first_experiment, first_experiment_temp[j])
+    
     stock_experience <- append(stock_experience, stock_experience_temp[j])
     econ_knowledge   <- append(econ_knowledge, econ_knowledge_temp[j])
     
@@ -2204,7 +2211,7 @@ for(i in 1:length(curr_payoff_4_SS_1)){
 
 # Part 5
 
-mean(unlist(mean_prob_5of6growth_SS), na.rm = T)
+median(unlist(mean_bid_1of6growth_SS), na.rm = T)  # Another option: na.omit(unlist(mean_prob_5of6growth_SS))
 
 # Is the difference between guessed payoffs and bids different from 0?
 # (a) No Superstars
@@ -2213,7 +2220,7 @@ t.test(unlist(mean_guess_1of3growth_NoSS), unlist(mean_bid_1of3growth_NoSS), pai
 t.test(unlist(mean_guess_0of3growth_NoSS), unlist(mean_bid_0of3growth_NoSS), paired = T, alternative = "two.sided")
 
 t.test(unlist(mean_guess_5of6growth_NoSS), unlist(mean_bid_5of6growth_NoSS), paired = T, alternative = "two.sided")
-#t.test(unlist(mean_guess_4of6growth_NoSS), unlist(mean_bid_4of6growth_NoSS), paired = T, alternative = "two.sided")  4 of 6 growth didn't happen in this batch.
+t.test(unlist(mean_guess_4of6growth_NoSS), unlist(mean_bid_4of6growth_NoSS), paired = T, alternative = "two.sided") 
 t.test(unlist(mean_guess_3of6growth_NoSS), unlist(mean_bid_3of6growth_NoSS), paired = T, alternative = "two.sided")
 t.test(unlist(mean_guess_2of6growth_NoSS), unlist(mean_bid_2of6growth_NoSS), paired = T, alternative = "two.sided")
 t.test(unlist(mean_guess_1of6growth_NoSS), unlist(mean_bid_1of6growth_NoSS), paired = T, alternative = "two.sided")
@@ -2233,6 +2240,7 @@ ci.median.ps(0.05, unlist(median_guess_5of6growth_NoSS), unlist(median_bid_5of6g
 
 hist(unlist(median_guess_0of6growth_NoSS) - unlist(median_bid_0of6growth_NoSS), breaks = 10, main = "Guess - Bid (0 of 6 Growth)", xlab = "Guess - Bid")
 hist(unlist(median_guess_5of6growth_NoSS) - unlist(median_bid_5of6growth_NoSS), breaks = 10, main = "Guess - Bid (5 of 6 Growth)", xlab = "Guess - Bid")
+hist(unlist(mean_guess_0of6growth_NoSS) - unlist(mean_bid_0of6growth_NoSS), breaks = 10, main = "Mean Guess - Mean Bid (0 of 6 Growth)", xlab = "Guess - Bid")
 hist(unlist(mean_guess_5of6growth_NoSS) - unlist(mean_bid_5of6growth_NoSS), breaks = 10, main = "Mean Guess - Mean Bid (5 of 6 Growth)", xlab = "Guess - Bid")
 
 # (b) Superstars are possible
@@ -2257,14 +2265,317 @@ ci.median.ps(0.05, unlist(median_guess_0of6growth_SS), unlist(median_bid_0of6gro
 ci.median.ps(0.05, unlist(median_guess_1of6growth_SS), unlist(median_bid_1of6growth_SS) )
 ci.median.ps(0.05, unlist(median_guess_2of6growth_SS), unlist(median_bid_2of6growth_SS) )
 ci.median.ps(0.05, unlist(median_guess_3of6growth_SS), unlist(median_bid_3of6growth_SS) )
-ci.median.ps(0.05, unlist(median_guess_4of6growth_SS), unlist(median_bid_4of6growth_SS) )
-ci.median.ps(0.05, unlist(median_guess_5of6growth_SS), unlist(median_bid_5of6growth_SS) )
+ci.median.ps(0.05, unlist(median_guess_5of6growth_SS), unlist(median_bid_4of6growth_SS) )
+ci.median.ps(0.05, unlist(median_guess_6of6growth_SS), unlist(median_bid_5of6growth_SS) )
 
 hist(unlist(median_guess_1of6growth_SS) - unlist(median_bid_1of6growth_SS), breaks = 10, main = "Guess - Bid (1 of 6 Growth)", xlab = "Guess - Bid")
 hist(unlist(mean_guess_1of6growth_SS) - unlist(mean_bid_1of6growth_SS), breaks = 10, main = "Mean Guess - Mean Bid (1 of 6 Growth)", xlab = "Guess - Bid")
 hist(unlist(median_guess_5of6growth_SS) - unlist(median_bid_5of6growth_SS), breaks = 10, main = "Guess - Bid (5 of 6 Growth)", xlab = "Guess - Bid")
 hist(unlist(mean_guess_5of6growth_SS) - unlist(mean_bid_5of6growth_SS), breaks = 10, main = "Mean Guess - Mean Bid (5 of 6 Growth)", xlab = "Guess - Bid")
+hist(unlist(mean_guess_3of3growth_SS) - unlist(mean_bid_3of3growth_SS), breaks = 10, main = "Mean Guess - Mean Bid, 3 of 3 Growth", xlab = "Guess - Bid")
+hist(unlist(mean_guess_6of6growth_SS) - unlist(mean_bid_6of6growth_SS), breaks = 10, main = "Mean Guess - Mean Bid, 6 of 6 Growth", xlab = "Guess - Bid")
+hist(unlist(mean_guess_1of6growth_SS) - unlist(mean_bid_1of6growth_SS), breaks = 10, main = "Mean Guess - Mean Bid, 1 of 6 Growth", xlab = "Guess - Bid")
 
 
 
 
+
+# This block of code checks to see if the order matters.  
+# Do subjects who see superstars first have significantly different results than those who see superstars second?
+
+mean_bid_3of3growth_SS_SSfirst <- list()
+mean_bid_3of3growth_SS_SSsecond <- list()
+mean_bid_3of3growth_NoSS_SSfirst <- list()
+mean_bid_3of3growth_NoSS_SSsecond <- list()
+
+for(i in 1:length(first_experiment)){
+  if(first_experiment[i] == "superstars"){ 
+    mean_bid_3of3growth_SS_SSfirst <- append(mean_bid_3of3growth_SS_SSfirst, mean_bid_3of3growth_SS[i])
+    mean_bid_3of3growth_NoSS_SSfirst <- append(mean_bid_3of3growth_NoSS_SSfirst, mean_bid_3of3growth_NoSS[i])
+  } else {
+    mean_bid_3of3growth_SS_SSsecond <- append(mean_bid_3of3growth_SS_SSsecond, mean_bid_3of3growth_SS[i])
+    mean_bid_3of3growth_NoSS_SSsecond <- append(mean_bid_3of3growth_NoSS_SSsecond, mean_bid_3of3growth_NoSS[i])
+  }
+}
+
+ci.2x2.mean.mixed(0.05, unlist(mean_bid_3of3growth_SS_SSfirst), unlist(mean_bid_3of3growth_NoSS_SSfirst), unlist(mean_bid_3of3growth_SS_SSsecond), unlist(mean_bid_3of3growth_NoSS_SSsecond))
+# mean(unlist(mean_bid_3of3growth_SS_SSfirst)) - mean(unlist(mean_bid_3of3growth_NoSS_SSfirst))
+# mean(unlist(mean_bid_3of3growth_SS_SSsecond)) - mean(unlist(mean_bid_3of3growth_NoSS_SSsecond))
+
+mean_guess_3of3growth_SS_SSfirst <- list()
+mean_guess_3of3growth_SS_SSsecond <- list()
+mean_guess_3of3growth_NoSS_SSfirst <- list()
+mean_guess_3of3growth_NoSS_SSsecond <- list()
+
+for(i in 1:length(first_experiment)){
+  if(first_experiment[i] == "superstars"){ 
+    mean_guess_3of3growth_SS_SSfirst <- append(mean_guess_3of3growth_SS_SSfirst, mean_guess_3of3growth_SS[i])
+    mean_guess_3of3growth_NoSS_SSfirst <- append(mean_guess_3of3growth_NoSS_SSfirst, mean_guess_3of3growth_NoSS[i])
+  } else {
+    mean_guess_3of3growth_SS_SSsecond <- append(mean_guess_3of3growth_SS_SSsecond, mean_guess_3of3growth_SS[i])
+    mean_guess_3of3growth_NoSS_SSsecond <- append(mean_guess_3of3growth_NoSS_SSsecond, mean_guess_3of3growth_NoSS[i])
+  }
+}
+
+ci.2x2.mean.mixed(0.05, unlist(mean_guess_3of3growth_SS_SSfirst), unlist(mean_guess_3of3growth_NoSS_SSfirst), unlist(mean_guess_3of3growth_SS_SSsecond), unlist(mean_guess_3of3growth_NoSS_SSsecond))
+
+table(unlist(first_experiment))
+
+        
+# Repeat the code above for 0 of 3 growth
+mean_bid_0of3growth_SS_SSfirst <- list()
+mean_bid_0of3growth_SS_SSsecond <- list()
+mean_bid_0of3growth_NoSS_SSfirst <- list()
+mean_bid_0of3growth_NoSS_SSsecond <- list()
+
+for(i in 1:length(first_experiment)){
+  if(first_experiment[i] == "superstars"){ 
+    mean_bid_0of3growth_SS_SSfirst <- append(mean_bid_0of3growth_SS_SSfirst, mean_bid_0of3growth_SS[i])
+    mean_bid_0of3growth_NoSS_SSfirst <- append(mean_bid_0of3growth_NoSS_SSfirst, mean_bid_0of3growth_NoSS[i])
+    print(i)
+  } else {
+    mean_bid_0of3growth_SS_SSsecond <- append(mean_bid_0of3growth_SS_SSsecond, mean_bid_0of3growth_SS[i])
+    mean_bid_0of3growth_NoSS_SSsecond <- append(mean_bid_0of3growth_NoSS_SSsecond, mean_bid_0of3growth_NoSS[i])
+  }
+}
+
+ci.2x2.mean.mixed(0.05, unlist(mean_bid_0of3growth_SS_SSfirst), unlist(mean_bid_0of3growth_NoSS_SSfirst), unlist(mean_bid_0of3growth_SS_SSsecond), unlist(mean_bid_0of3growth_NoSS_SSsecond))
+mean(unlist(mean_bid_0of3growth_SS_SSfirst)) - mean(unlist(mean_bid_0of3growth_NoSS_SSfirst))
+mean(unlist(mean_bid_0of3growth_SS_SSsecond)) - mean(unlist(mean_bid_0of3growth_NoSS_SSsecond))
+
+mean_guess_0of3growth_SS_SSfirst <- list()
+mean_guess_0of3growth_SS_SSsecond <- list()
+mean_guess_0of3growth_NoSS_SSfirst <- list()
+mean_guess_0of3growth_NoSS_SSsecond <- list()
+
+for(i in 1:length(first_experiment)){
+  if(first_experiment[i] == "superstars"){ 
+    mean_guess_0of3growth_SS_SSfirst <- append(mean_guess_0of3growth_SS_SSfirst, mean_guess_0of3growth_SS[i])
+    mean_guess_0of3growth_NoSS_SSfirst <- append(mean_guess_0of3growth_NoSS_SSfirst, mean_guess_0of3growth_NoSS[i])
+  } else {
+    mean_guess_0of3growth_SS_SSsecond <- append(mean_guess_0of3growth_SS_SSsecond, mean_guess_0of3growth_SS[i])
+    mean_guess_0of3growth_NoSS_SSsecond <- append(mean_guess_0of3growth_NoSS_SSsecond, mean_guess_0of3growth_NoSS[i])
+  }
+}
+
+ci.2x2.mean.mixed(0.05, unlist(mean_guess_0of3growth_SS_SSfirst), unlist(mean_guess_0of3growth_NoSS_SSfirst), unlist(mean_guess_0of3growth_SS_SSsecond), unlist(mean_guess_0of3growth_NoSS_SSsecond))
+mean(unlist(mean_guess_0of3growth_SS_SSfirst)) - mean(unlist(mean_guess_0of3growth_NoSS_SSfirst))
+mean(unlist(mean_guess_0of3growth_SS_SSsecond)) - mean(unlist(mean_guess_0of3growth_NoSS_SSsecond))
+
+
+
+# Analyzing stocks that start at 7 or 13 rather than the usual 10.
+
+# 3 of 3 Growth
+
+trim <- 0.1
+
+mean(unlist(mean_guess_3of3growth_SS), trim = trim)
+mean(unlist(mean_bid_3of3growth_SS), trim = trim)
+
+mean(unlist(guess_3_2_SS_7_13_2))  # Only the second pick in round 2 had 3 of 3 growth.  
+mean(unlist(bid_3_2_SS_7_13_2))
+
+hist(unlist(guess_3_2_SS_7_13_2) - unlist(bid_3_2_SS_7_13_2), breaks = 10, main = "Guess - Bid (3 of 3 Growth), Starting Point: 7", xlab = "Guess - Bid")
+hist(unlist(mean_guess_3of3growth_SS) - unlist(mean_bid_3of3growth_SS), breaks = 10, main = "Guess - Bid (3 of 3 Growth), Starting Point: 10", xlab = "Guess - Bid")
+
+t.test(unlist(guess_3_2_SS_7_13_2), unlist(bid_3_2_SS_7_13_2), paired = T, alternative = "two.sided")
+t.test(unlist(mean_guess_3of3growth_SS), unlist(mean_bid_3of3growth_SS), paired = T, alternative = "two.sided")
+
+
+mean(unlist(mean_guess_3of3growth_SS), trim = trim) - mean(unlist(mean_bid_3of3growth_SS), trim = trim)
+median(unlist(median_guess_3of3growth_SS), trim = trim) - median(unlist(median_bid_3of3growth_SS), trim = trim)
+
+mean(unlist(guess_3_2_SS_7_13_2), trim = trim) - mean(unlist(bid_3_2_SS_7_13_2), trim = trim)
+median(unlist(guess_3_2_SS_7_13_2)) - median(unlist(bid_3_2_SS_7_13_2))
+
+
+# 0 of 3 Growth
+
+m <- mean(unlist(guess_3_SS_7_13_2))  # This is the first pick in round 1.  It had 0 of 3 growth
+b <- mean(unlist(bid_3_SS_7_13_2))
+
+df <- data.frame(guess = matrix(unlist(guess_3_SS_7_13_2)), mean_guess = m, bid = matrix(unlist(bid_3_SS_7_13_2)), mean_bid = b)
+model <- lm(df$guess ~ df$mean_guess)
+studres(model)[23]
+sort(studres(model))
+guess <- df$guess[-23]  # The item at line 23 is likely an input error (probability instead of guess), so it is eliminated.
+mean(guess)
+length(guess)
+
+model2 <- lm(df$bid ~ df$mean_bid)
+sort(studres(model2))
+mean(df$bid[-23])
+
+
+t.test(guess, df$bid[-23], paired = T, alternative = "two.sided")
+t.test(unlist(mean_guess_0of3growth_SS), unlist(mean_bid_0of3growth_SS), paired = T, alternative = "two.sided")
+
+
+mean(unlist(mean_guess_0of3growth_SS))
+mean(unlist(mean_bid_0of3growth_SS))
+
+
+
+# Histograms showing the distributions of probability estimates
+
+hist(unlist(mean_prob_0of3growth_SS), main = "Estimated Probability of Superstar with 0 of 3 Growth", xlab = "Estimated Probability")
+hist(unlist(mean_prob_1of3growth_SS), main = "Estimated Probability of Superstar with 1 of 3 Growth", xlab = "Estimated Probability")
+hist(unlist(mean_prob_3of3growth_SS), main = "Estimated Probability of Superstar with 3 of 3 Growth", xlab = "Estimated Probability")
+
+median(unlist(median_prob_0of3growth_SS))
+median(unlist(median_prob_1of3growth_SS))
+median(unlist(median_prob_2of3growth_SS))
+median(unlist(median_prob_3of3growth_SS))
+
+hist(unlist(mean_prob_2of4growth_SS), main = "Estimated Probability of Superstar with 2 of 4 Growth", xlab = "Estimated Probability")
+hist(unlist(mean_prob_3of4growth_SS), main = "Estimated Probability of Superstar with 3 of 4 Growth", xlab = "Estimated Probability")
+hist(unlist(mean_prob_4of4growth_SS), main = "Estimated Probability of Superstar with 4 of 4 Growth", xlab = "Estimated Probability")
+
+median(unlist(median_prob_2of4growth_SS))
+median(unlist(median_prob_3of4growth_SS))
+median(unlist(median_prob_4of4growth_SS))
+
+
+median(unlist(median_prob_3of5growth_SS))
+median(unlist(median_prob_4of5growth_SS))
+median(unlist(median_prob_5of5growth_SS))
+
+
+median(unlist(median_prob_1of6growth_SS))
+median(unlist(median_prob_2of6growth_SS))
+median(unlist(median_prob_3of6growth_SS))
+median(unlist(median_prob_5of6growth_SS))
+median(unlist(median_prob_6of6growth_SS))
+
+
+# Test to see if probability guesses are different when incentives are given for accurate probability estimates.
+
+# The first 29 subjects did not have such incentives.
+
+t.test(unlist(mean_prob_3of3growth_SS)[1:29], unlist(mean_prob_3of3growth_SS)[30:68], alternative = "two.sided")
+
+
+# Test to see if the slope of the regression line when regressing valuation on growth differs from 0.
+
+num_subjects <- length(bid_3_SS_5)
+begin_subjects <- 30 #The first 29 subjects had a different draw.
+
+# Test for different levels of growth at period 3 when SS are possible.
+
+last_bid_3of3growth <- bid_3_SS_5[begin_subjects:num_subjects]
+last_guess_3of3growth <- guess_3_SS_5[begin_subjects:num_subjects]
+valuation_3of3growth <- unlist(last_guess_3of3growth) - unlist(last_bid_3of3growth)
+
+last_bid_2of3growth <- bid_3_SS_4[begin_subjects:num_subjects]
+last_guess_2of3growth <- guess_3_SS_4[begin_subjects:num_subjects]
+valuation_2of3growth <- unlist(last_guess_2of3growth) - unlist(last_bid_2of3growth)
+
+last_bid_1of3growth <- bid_3_2_SS_2[begin_subjects:num_subjects]
+last_guess_1of3growth <- guess_3_2_SS_2[begin_subjects:num_subjects]
+valuation_1of3growth <- unlist(last_guess_1of3growth) - unlist(last_bid_1of3growth)
+
+last_bid_0of3growth <- bid_3_2_SS_5[begin_subjects:num_subjects]
+last_guess_0of3growth <- guess_3_2_SS_5[begin_subjects:num_subjects]
+valuation_0of3growth <- unlist(last_guess_0of3growth) - unlist(last_bid_0of3growth)
+
+
+library(tidyr)
+
+# Create a dataframe in wide format
+df_wide <- data.frame(
+  id = c(1:length(valuation_0of3growth)),
+  val_0of3_growth = valuation_0of3growth,
+  val_1of3_growth = valuation_1of3growth,
+  val_2of3_growth = valuation_2of3growth,
+  val_3of3_growth = valuation_3of3growth
+)
+
+# Convert the dataframe from wide to long format
+df_long <- pivot_longer(df_wide, cols = c(val_0of3_growth, val_1of3_growth, val_2of3_growth,val_3of3_growth), 
+                        names_to = "variable", values_to = "valuation")
+df_long$growth = rep(c(0,1,2,3),length(df_long$id)/4)
+
+attach(df_long)
+out <- gls(valuation ~ growth, correlation = corSymm(form = ~1| id))
+print(out)
+
+summary(out)
+confint(out)
+
+# Test for different levels of growth at period 3 when SS are not possible.
+
+last_bid_3of3growth <- bid_3_NoSS_4[begin_subjects:num_subjects]
+last_guess_3of3growth <- guess_3_NoSS_4[begin_subjects:num_subjects]
+valuation_3of3growth <- unlist(last_guess_3of3growth) - unlist(last_bid_3of3growth)
+
+last_bid_2of3growth <- bid_3_NoSS_5[begin_subjects:num_subjects]
+last_guess_2of3growth <- guess_3_NoSS_5[begin_subjects:num_subjects]
+valuation_2of3growth <- unlist(last_guess_2of3growth) - unlist(last_bid_2of3growth)
+
+last_bid_1of3growth <- bid_3_2_NoSS_2[begin_subjects:num_subjects]
+last_guess_1of3growth <- guess_3_2_NoSS_2[begin_subjects:num_subjects]
+valuation_1of3growth <- unlist(last_guess_1of3growth) - unlist(last_bid_1of3growth)
+
+last_bid_0of3growth <- bid_3_2_NoSS_5[begin_subjects:num_subjects]
+last_guess_0of3growth <- guess_3_2_NoSS_5[begin_subjects:num_subjects]
+valuation_0of3growth <- unlist(last_guess_0of3growth) - unlist(last_bid_0of3growth)
+
+# Create a dataframe in wide format
+df_wide <- data.frame(
+  id = c(1:length(valuation_0of3growth)),
+  val_0of3_growth = valuation_0of3growth,
+  val_1of3_growth = valuation_1of3growth,
+  val_2of3_growth = valuation_2of3growth,
+  val_3of3_growth = valuation_3of3growth
+)
+
+# Convert the dataframe from wide to long format
+df_long <- pivot_longer(df_wide, cols = c(val_0of3_growth, val_1of3_growth, val_2of3_growth,val_3of3_growth), 
+                        names_to = "variable", values_to = "valuation")
+df_long$growth = rep(c(0,1,2,3),length(df_long$id)/4)
+
+attach(df_long)
+out <- gls(valuation ~ growth, correlation = corSymm(form = ~1| id))
+print(out)
+
+summary(out)
+confint(out)
+
+
+# Test for different levels of growth at period 3 when SS are possible and assets start at 7 or 13.
+
+last_bid_3of3growth <- bid_3_2_SS_7_13_2
+last_guess_3of3growth <- guess_3_2_SS_7_13_2
+valuation_3of3growth <- unlist(last_guess_3of3growth) - unlist(last_bid_3of3growth)
+
+last_bid_2of3growth <- bid_3_2_SS_7_13_1
+last_guess_2of3growth <- guess_3_2_SS_7_13_1
+valuation_2of3growth <- unlist(last_guess_2of3growth) - unlist(last_bid_2of3growth)
+
+last_bid_0of3growth <- bid_3_SS_7_13_2
+last_guess_0of3growth <- guess_3_SS_7_13_2
+valuation_0of3growth <- unlist(last_guess_0of3growth) - unlist(last_bid_0of3growth)
+
+# Create a dataframe in wide format
+df_wide <- data.frame(
+  id = c(1:length(valuation_0of3growth)),
+  val_0of3_growth = valuation_0of3growth,
+  #val_1of3_growth = valuation_1of3growth,  No data exists for 1 of 3 growth in this situation.
+  val_2of3_growth = valuation_2of3growth,
+  val_3of3_growth = valuation_3of3growth
+)
+
+# Convert the dataframe from wide to long format
+df_long <- pivot_longer(df_wide, cols = c(val_0of3_growth, val_2of3_growth,val_3of3_growth), 
+                        names_to = "variable", values_to = "valuation")
+df_long$growth = rep(c(0,2,3),length(df_long$id)/3)
+
+attach(df_long)
+out <- gls(valuation ~ growth, correlation = corSymm(form = ~1| id))
+print(out)
+
+summary(out)
+confint(out)
+
+mean(valuation_3of3growth)
